@@ -77,6 +77,24 @@ function validate(data) {
   return errors;
 }
 
+// ─── Field wrapper — defined OUTSIDE BookingForm to prevent remount on each keystroke ───
+function Field({ name, label, required, formId, errors, touched, children }) {
+  const hasError = touched[name] && errors[name];
+  return (
+    <div className="form-group">
+      <label htmlFor={`${formId}-${name}`} className="form-label">
+        {label}{required && <span className="required" aria-hidden="true"> *</span>}
+      </label>
+      {children}
+      {hasError && (
+        <span className="form-error" role="alert" id={`${formId}-${name}-error`}>
+          ⚠ {errors[name]}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export default function BookingForm({ initialData = {}, onSubmit, isLoading = false, submitLabel = 'Save Booking', serverErrors = [] }) {
   const formId = useId();
   const [data, setData] = useState({ ...DEFAULT_FORM, ...initialData });
@@ -103,8 +121,6 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
     setClientErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
   };
 
-  const showError = (field) => touched[field] && errors[field];
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Touch all fields to show all errors
@@ -123,19 +139,8 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
     onSubmit(sanitized);
   };
 
-  const Field = ({ name, label, required, children }) => (
-    <div className="form-group">
-      <label htmlFor={`${formId}-${name}`} className="form-label">
-        {label}{required && <span className="required" aria-hidden="true"> *</span>}
-      </label>
-      {children}
-      {showError(name) && (
-        <span className="form-error" role="alert" id={`${formId}-${name}-error`}>
-          ⚠ {errors[name]}
-        </span>
-      )}
-    </div>
-  );
+  // Shared props passed to every <Field> so it stays stable across renders
+  const fieldProps = { formId, errors, touched };
 
   return (
     <form
@@ -148,49 +153,49 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
       <div className="form-grid">
         <div className="form-section-title" role="heading" aria-level="3">Customer Information</div>
 
-        <Field name="customerName" label="Customer Name" required>
+        <Field name="customerName" label="Customer Name" required {...fieldProps}>
           <input
             id={`${formId}-customerName`}
             type="text"
-            className={`form-input${showError('customerName') ? ' error' : ''}`}
+            className={`form-input${touched.customerName && errors.customerName ? ' error' : ''}`}
             value={data.customerName}
             onChange={handleChange('customerName')}
             onBlur={handleBlur('customerName')}
             placeholder="e.g. Ravi Sharma"
             aria-required="true"
-            aria-invalid={!!showError('customerName')}
-            aria-describedby={showError('customerName') ? `${formId}-customerName-error` : undefined}
+            aria-invalid={!!(touched.customerName && errors.customerName)}
+            aria-describedby={touched.customerName && errors.customerName ? `${formId}-customerName-error` : undefined}
             autoComplete="name"
           />
         </Field>
 
-        <Field name="customerPhone" label="Phone Number" required>
+        <Field name="customerPhone" label="Phone Number" required {...fieldProps}>
           <input
             id={`${formId}-customerPhone`}
             type="tel"
-            className={`form-input${showError('customerPhone') ? ' error' : ''}`}
+            className={`form-input${touched.customerPhone && errors.customerPhone ? ' error' : ''}`}
             value={data.customerPhone}
             onChange={handleChange('customerPhone')}
             onBlur={handleBlur('customerPhone')}
             placeholder="e.g. 9876543210"
             aria-required="true"
-            aria-invalid={!!showError('customerPhone')}
-            aria-describedby={showError('customerPhone') ? `${formId}-customerPhone-error` : undefined}
+            aria-invalid={!!(touched.customerPhone && errors.customerPhone)}
+            aria-describedby={touched.customerPhone && errors.customerPhone ? `${formId}-customerPhone-error` : undefined}
             autoComplete="tel"
           />
         </Field>
 
-        <Field name="customerEmail" label="Email Address">
+        <Field name="customerEmail" label="Email Address" {...fieldProps}>
           <input
             id={`${formId}-customerEmail`}
             type="email"
-            className={`form-input${showError('customerEmail') ? ' error' : ''}`}
+            className={`form-input${touched.customerEmail && errors.customerEmail ? ' error' : ''}`}
             value={data.customerEmail}
             onChange={handleChange('customerEmail')}
             onBlur={handleBlur('customerEmail')}
             placeholder="e.g. ravi@example.com"
-            aria-invalid={!!showError('customerEmail')}
-            aria-describedby={showError('customerEmail') ? `${formId}-customerEmail-error` : undefined}
+            aria-invalid={!!(touched.customerEmail && errors.customerEmail)}
+            aria-describedby={touched.customerEmail && errors.customerEmail ? `${formId}-customerEmail-error` : undefined}
             autoComplete="email"
           />
         </Field>
@@ -198,41 +203,41 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
         {/* ── Vehicle Information ── */}
         <div className="form-section-title" role="heading" aria-level="3">Vehicle Information</div>
 
-        <Field name="vehicleMake" label="Vehicle Make" required>
+        <Field name="vehicleMake" label="Vehicle Make" required {...fieldProps}>
           <input
             id={`${formId}-vehicleMake`}
             type="text"
-            className={`form-input${showError('vehicleMake') ? ' error' : ''}`}
+            className={`form-input${touched.vehicleMake && errors.vehicleMake ? ' error' : ''}`}
             value={data.vehicleMake}
             onChange={handleChange('vehicleMake')}
             onBlur={handleBlur('vehicleMake')}
             placeholder="e.g. Toyota, Maruti, Honda"
             aria-required="true"
-            aria-invalid={!!showError('vehicleMake')}
-            aria-describedby={showError('vehicleMake') ? `${formId}-vehicleMake-error` : undefined}
+            aria-invalid={!!(touched.vehicleMake && errors.vehicleMake)}
+            aria-describedby={touched.vehicleMake && errors.vehicleMake ? `${formId}-vehicleMake-error` : undefined}
           />
         </Field>
 
-        <Field name="vehicleModel" label="Vehicle Model" required>
+        <Field name="vehicleModel" label="Vehicle Model" required {...fieldProps}>
           <input
             id={`${formId}-vehicleModel`}
             type="text"
-            className={`form-input${showError('vehicleModel') ? ' error' : ''}`}
+            className={`form-input${touched.vehicleModel && errors.vehicleModel ? ' error' : ''}`}
             value={data.vehicleModel}
             onChange={handleChange('vehicleModel')}
             onBlur={handleBlur('vehicleModel')}
             placeholder="e.g. Camry, Swift, City"
             aria-required="true"
-            aria-invalid={!!showError('vehicleModel')}
-            aria-describedby={showError('vehicleModel') ? `${formId}-vehicleModel-error` : undefined}
+            aria-invalid={!!(touched.vehicleModel && errors.vehicleModel)}
+            aria-describedby={touched.vehicleModel && errors.vehicleModel ? `${formId}-vehicleModel-error` : undefined}
           />
         </Field>
 
-        <Field name="vehicleYear" label="Vehicle Year" required>
+        <Field name="vehicleYear" label="Vehicle Year" required {...fieldProps}>
           <input
             id={`${formId}-vehicleYear`}
             type="number"
-            className={`form-input${showError('vehicleYear') ? ' error' : ''}`}
+            className={`form-input${touched.vehicleYear && errors.vehicleYear ? ' error' : ''}`}
             value={data.vehicleYear}
             onChange={handleChange('vehicleYear')}
             onBlur={handleBlur('vehicleYear')}
@@ -240,24 +245,24 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
             min="1900"
             max={new Date().getFullYear() + 1}
             aria-required="true"
-            aria-invalid={!!showError('vehicleYear')}
-            aria-describedby={showError('vehicleYear') ? `${formId}-vehicleYear-error` : undefined}
+            aria-invalid={!!(touched.vehicleYear && errors.vehicleYear)}
+            aria-describedby={touched.vehicleYear && errors.vehicleYear ? `${formId}-vehicleYear-error` : undefined}
           />
         </Field>
 
         {/* ── Service Details ── */}
         <div className="form-section-title" role="heading" aria-level="3">Service Details</div>
 
-        <Field name="serviceType" label="Service Type" required>
+        <Field name="serviceType" label="Service Type" required {...fieldProps}>
           <select
             id={`${formId}-serviceType`}
-            className={`form-select${showError('serviceType') ? ' error' : ''}`}
+            className={`form-select${touched.serviceType && errors.serviceType ? ' error' : ''}`}
             value={data.serviceType}
             onChange={handleChange('serviceType')}
             onBlur={handleBlur('serviceType')}
             aria-required="true"
-            aria-invalid={!!showError('serviceType')}
-            aria-describedby={showError('serviceType') ? `${formId}-serviceType-error` : undefined}
+            aria-invalid={!!(touched.serviceType && errors.serviceType)}
+            aria-describedby={touched.serviceType && errors.serviceType ? `${formId}-serviceType-error` : undefined}
           >
             {SERVICE_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value} disabled={!opt.value}>
@@ -267,16 +272,16 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
           </select>
         </Field>
 
-        <Field name="assignedMechanic" label="Assigned Mechanic" required>
+        <Field name="assignedMechanic" label="Assigned Mechanic" required {...fieldProps}>
           <select
             id={`${formId}-assignedMechanic`}
-            className={`form-select${showError('assignedMechanic') ? ' error' : ''}`}
+            className={`form-select${touched.assignedMechanic && errors.assignedMechanic ? ' error' : ''}`}
             value={data.assignedMechanic}
             onChange={handleChange('assignedMechanic')}
             onBlur={handleBlur('assignedMechanic')}
             aria-required="true"
-            aria-invalid={!!showError('assignedMechanic')}
-            aria-describedby={showError('assignedMechanic') ? `${formId}-assignedMechanic-error` : undefined}
+            aria-invalid={!!(touched.assignedMechanic && errors.assignedMechanic)}
+            aria-describedby={touched.assignedMechanic && errors.assignedMechanic ? `${formId}-assignedMechanic-error` : undefined}
           >
             <option value="">— Select Mechanic —</option>
             {MECHANICS.map((m) => (
@@ -285,7 +290,7 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
           </select>
         </Field>
 
-        <Field name="status" label="Status">
+        <Field name="status" label="Status" {...fieldProps}>
           <select
             id={`${formId}-status`}
             className="form-select"
@@ -299,7 +304,7 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
           </select>
         </Field>
 
-        <Field name="priority" label="Priority">
+        <Field name="priority" label="Priority" {...fieldProps}>
           <select
             id={`${formId}-priority`}
             className="form-select"
@@ -313,19 +318,19 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
           </select>
         </Field>
 
-        <Field name="estimatedCost" label="Estimated Cost (₹)">
+        <Field name="estimatedCost" label="Estimated Cost (₹)" {...fieldProps}>
           <input
             id={`${formId}-estimatedCost`}
             type="number"
-            className={`form-input${showError('estimatedCost') ? ' error' : ''}`}
+            className={`form-input${touched.estimatedCost && errors.estimatedCost ? ' error' : ''}`}
             value={data.estimatedCost}
             onChange={handleChange('estimatedCost')}
             onBlur={handleBlur('estimatedCost')}
             placeholder="e.g. 1500"
             min="0"
             step="50"
-            aria-invalid={!!showError('estimatedCost')}
-            aria-describedby={showError('estimatedCost') ? `${formId}-estimatedCost-error` : undefined}
+            aria-invalid={!!(touched.estimatedCost && errors.estimatedCost)}
+            aria-describedby={touched.estimatedCost && errors.estimatedCost ? `${formId}-estimatedCost-error` : undefined}
           />
         </Field>
 
