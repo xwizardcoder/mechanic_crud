@@ -93,6 +93,38 @@
   --navbar-height: 64px;
   --sidebar-width: 260px;
   --max-content:   1200px;
+
+  /* Theme-specific Overrides */
+  --bg-blur: rgba(10, 13, 18, 0.92);
+  --border-blur: rgba(255, 255, 255, 0.06);
+  --hover-overlay: rgba(79, 128, 255, 0.12);
+}
+
+:root[data-theme="light"] {
+  --color-950: #ffffff;
+  --color-900: #f8fafc;
+  --color-850: #f1f5f9;
+  --color-800: #e2e8f0;
+  --color-750: #cbd5e1;
+  --color-700: #94a3b8;
+  --color-600: #64748b;
+  --color-500: #475569;
+  --color-400: #334155;
+  --color-300: #1e293b;
+  --color-200: #0f172a;
+  --color-100: #020617;
+  --color-50:  #000000;
+  --color-25:  #000000;
+  --color-0:   #000000;
+
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  
+  --bg-blur: rgba(255, 255, 255, 0.92);
+  --border-blur: rgba(0, 0, 0, 0.06);
+  --hover-overlay: rgba(79, 128, 255, 0.1);
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
@@ -170,10 +202,10 @@ a:hover { color: var(--color-0); }
   right: 0;
   z-index: 100;
   height: var(--navbar-height);
-  background: rgba(10, 13, 18, 0.92);
+  background: var(--bg-blur);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--border-blur);
   display: flex;
   align-items: center;
 }
@@ -243,7 +275,7 @@ a:hover { color: var(--color-0); }
 
 .navbar-link:hover,
 .navbar-link.active {
-  background: rgba(79, 128, 255, 0.12);
+  background: var(--hover-overlay);
   color: var(--accent-light);
 }
 

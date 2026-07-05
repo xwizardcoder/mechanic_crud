@@ -1,6 +1,18 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-inner">
@@ -34,13 +46,23 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <Link
-          to="/bookings/new"
-          className="navbar-cta"
-          aria-label="Create new booking"
-        >
-          ＋ New Booking
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button 
+            onClick={toggleTheme} 
+            className="btn btn-ghost btn-icon" 
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            style={{ fontSize: 20 }}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <Link
+            to="/bookings/new"
+            className="navbar-cta"
+            aria-label="Create new booking"
+          >
+            ＋ New Booking
+          </Link>
+        </div>
       </div>
     </nav>
   );
