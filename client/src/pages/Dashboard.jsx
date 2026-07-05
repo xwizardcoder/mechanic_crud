@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { getBookings, deleteBooking, getStats } from '../api/bookings';
-import BookingCard from '../components/BookingCard';
+import BookingTable from '../components/BookingTable';
 import StatsCard from '../components/StatsCard';
 import SearchBar from '../components/SearchBar';
 import FilterBar from '../components/FilterBar';
@@ -83,13 +83,13 @@ export default function Dashboard() {
     <main className="page-wrapper" id="main-content">
       <div className="container page-content">
         {/* Header */}
-        <div className="page-header">
+        <div className="page-header" style={{ marginBottom: 32, alignItems: 'center' }}>
           <div className="page-header-left">
-            <h1 className="page-title">Dashboard</h1>
-            <p className="page-subtitle">Manage all mechanic service bookings</p>
+            <h1 className="page-title" style={{ fontSize: 'var(--font-size-2xl)', color: 'var(--color-100)' }}>Bookings</h1>
+            <p className="page-subtitle" style={{ color: 'var(--color-400)', marginTop: 4 }}>Manage and collaborate on all service bookings</p>
           </div>
-          <Link to="/bookings/new" className="btn btn-primary btn-lg" aria-label="Create new booking">
-            ＋ New Booking
+          <Link to="/bookings/new" className="btn btn-primary" style={{ backgroundColor: 'var(--accent-dark)', borderRadius: 'var(--radius-sm)' }} aria-label="Add new booking">
+            ＋ Add booking
           </Link>
         </div>
 
@@ -128,18 +128,45 @@ export default function Dashboard() {
         )}
 
         {/* Toolbar */}
-        <div className="toolbar" role="search" aria-label="Search and filter bookings">
-          <SearchBar value={search} onChange={setSearch} />
-          <FilterBar filters={filters} onChange={setFilters} />
-          {(search || Object.values(filters).some((v) => v !== 'all')) && (
-            <button
-              className="btn btn-ghost btn-sm"
-              onClick={() => { setSearch(''); setFilters(DEFAULT_FILTERS); }}
-              aria-label="Clear all filters"
-            >
-              ✕ Clear
-            </button>
-          )}
+        <div className="toolbar" role="search" aria-label="Search and filter bookings" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+          {/* Status Tabs */}
+          <div className="tabs" style={{ display: 'flex', gap: 4, background: 'var(--color-900)', padding: 4, borderRadius: 'var(--radius-lg)' }}>
+            {['all', 'pending', 'in_progress', 'completed', 'cancelled'].map((status) => (
+              <button
+                key={status}
+                className={`tab-btn ${filters.status === status ? 'active' : ''}`}
+                onClick={() => setFilters({ ...filters, status })}
+                style={{
+                  padding: '6px 16px',
+                  border: 'none',
+                  background: filters.status === status ? 'var(--color-950)' : 'transparent',
+                  color: filters.status === status ? 'var(--color-100)' : 'var(--color-400)',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: filters.status === status ? 600 : 500,
+                  cursor: 'pointer',
+                  textTransform: 'capitalize',
+                  boxShadow: filters.status === status ? 'var(--shadow-sm)' : 'none'
+                }}
+              >
+                {status.replace('_', ' ')}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <SearchBar value={search} onChange={setSearch} />
+            <FilterBar filters={filters} onChange={setFilters} hideStatus />
+            {(search || Object.values(filters).some((v) => v !== 'all')) && (
+              <button
+                className="btn btn-ghost btn-sm"
+                onClick={() => { setSearch(''); setFilters(DEFAULT_FILTERS); }}
+                aria-label="Clear all filters"
+              >
+                ✕ Clear
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Booking Count */}
@@ -168,15 +195,10 @@ export default function Dashboard() {
           />
         ) : (
           <section aria-label="Bookings list">
-            <div className="booking-grid">
-              {bookings.map((booking) => (
-                <BookingCard
-                  key={booking._id}
-                  booking={booking}
-                  onDelete={(b) => setDeleteTarget(b)}
-                />
-              ))}
-            </div>
+            <BookingTable bookings={bookings} onDelete={(bId) => {
+              const b = bookings.find(x => x._id === bId);
+              setDeleteTarget(b);
+            }} />
           </section>
         )}
       </div>

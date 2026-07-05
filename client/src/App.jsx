@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import NewBooking from './pages/NewBooking';
 import BookingDetail from './pages/BookingDetail';
@@ -44,7 +44,7 @@ export default function App() {
         Skip to main content
       </a>
 
-      <Navbar />
+      <Sidebar />
 
       <Routes>
         <Route path="/"                      element={<Dashboard />} />

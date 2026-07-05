@@ -21,7 +21,7 @@ export function StatusBadge({ status }) {
       role="status"
     >
       <span className="badge-dot" aria-hidden="true" />
-      {config.icon} {config.label}
+      {config.label}
     </span>
   );
 }
@@ -33,7 +33,7 @@ export function PriorityBadge({ priority }) {
       className={`badge badge-${priority}`}
       aria-label={`Priority: ${config.label}`}
     >
-      {config.icon} {config.label}
+      {config.label}
     </span>
   );
 }

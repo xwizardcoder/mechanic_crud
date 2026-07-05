@@ -1,0 +1,129 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--color-950);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-blur);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-blur);
+}
+
+.data-table th {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-400);
+  text-transform: capitalize;
+}
+
+.data-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+  background: var(--color-900);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.user-cell .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-800);
+  color: var(--color-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.user-cell .user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-cell .user-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-100);
+}
+
+.user-cell .user-email {
+  font-size: var(--font-size-xs);
+  color: var(--color-400);
+}
+
+.actions-cell {
+  text-align: right;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--color-950);
+  min-width: 160px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-blur);
+  border-radius: var(--radius-sm);
+  z-index: 10;
+  padding: var(--space-1) 0;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  color: var(--color-200);
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  display: block;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--color-900);
+  color: var(--color-0);
+}
+
+.dropdown-item.text-danger {
+  color: var(--danger);
+}
+.dropdown-item.text-danger:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}

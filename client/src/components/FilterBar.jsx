@@ -29,29 +29,31 @@ const PRIORITIES = [
   { value: 'urgent', label: 'Urgent' },
 ];
 
-export default function FilterBar({ filters, onChange }) {
+export default function FilterBar({ filters, onChange, hideStatus }) {
   const statusId   = useId();
   const serviceId  = useId();
   const priorityId = useId();
 
   return (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }} role="group" aria-label="Filter bookings">
-      <div>
-        <label htmlFor={statusId} style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>
-          Status filter
-        </label>
-        <select
-          id={statusId}
-          className="filter-select"
-          value={filters.status}
-          onChange={(e) => onChange({ ...filters, status: e.target.value })}
-          aria-label="Filter by status"
-        >
-          {STATUSES.map((s) => (
-            <option key={s.value} value={s.value}>{s.label}</option>
-          ))}
-        </select>
-      </div>
+      {!hideStatus && (
+        <div>
+          <label htmlFor={statusId} style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>
+            Status filter
+          </label>
+          <select
+            id={statusId}
+            className="filter-select"
+            value={filters.status}
+            onChange={(e) => onChange({ ...filters, status: e.target.value })}
+            aria-label="Filter by status"
+          >
+            {STATUSES.map((s) => (
+              <option key={s.value} value={s.value}>{s.label}</option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div>
         <label htmlFor={serviceId} style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>

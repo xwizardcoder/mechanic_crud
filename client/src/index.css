@@ -6,44 +6,44 @@
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
-  /* Monochromatic Slate Palette */
-  --color-950: #0a0d12;
-  --color-900: #0f1117;
-  --color-850: #141720;
-  --color-800: #1a1e2e;
-  --color-750: #1f2438;
-  --color-700: #252a42;
-  --color-600: #343b58;
-  --color-500: #4a5278;
-  --color-400: #6b7399;
-  --color-300: #8d96b8;
-  --color-200: #b4bad3;
-  --color-100: #d8dbea;
-  --color-50:  #eef0f7;
-  --color-25:  #f7f8fb;
-  --color-0:   #ffffff;
+  /* Neutral Palette (Light Mode Default) */
+  --color-950: #ffffff;
+  --color-900: #f8fafc;
+  --color-850: #f1f5f9;
+  --color-800: #e2e8f0;
+  --color-750: #cbd5e1;
+  --color-700: #94a3b8;
+  --color-600: #64748b;
+  --color-500: #475569;
+  --color-400: #334155;
+  --color-300: #1e293b;
+  --color-200: #0f172a;
+  --color-100: #020617;
+  --color-50:  #000000;
+  --color-25:  #000000;
+  --color-0:   #000000;
 
-  /* Accent: Electric Blue (single accent colour permitted) */
-  --accent:       #4f80ff;
-  --accent-light: #7ba3ff;
-  --accent-dark:  #3563e9;
-  --accent-glow:  rgba(79, 128, 255, 0.18);
+  /* Accent: Vibrant Purple (MarcoHR style) */
+  --accent:       #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-dark:  #7c3aed;
+  --accent-glow:  rgba(139, 92, 246, 0.15);
 
   /* Semantic Colours */
-  --success:  #22c55e;
+  --success:  #10b981;
   --warning:  #f59e0b;
   --danger:   #ef4444;
   --info:     #06b6d4;
 
   /* Status Colours */
   --status-pending:     #f59e0b;
-  --status-in_progress: #4f80ff;
-  --status-completed:   #22c55e;
-  --status-cancelled:   #6b7399;
+  --status-in_progress: #8b5cf6;
+  --status-completed:   #10b981;
+  --status-cancelled:   #64748b;
 
   /* Priority Colours */
-  --priority-low:    #8d96b8;
-  --priority-normal: #4f80ff;
+  --priority-low:    #94a3b8;
+  --priority-normal: #8b5cf6;
   --priority-high:   #f59e0b;
   --priority-urgent: #ef4444;
 
@@ -78,11 +78,11 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md:  0 4px 12px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
-  --shadow-lg:  0 10px 30px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-xl:  0 20px 50px rgba(0,0,0,0.6);
-  --shadow-accent: 0 4px 20px rgba(79,128,255,0.35);
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --shadow-accent: 0 4px 14px rgba(139, 92, 246, 0.4);
 
   /* Transitions */
   --transition-fast:   150ms ease;
@@ -90,41 +90,40 @@
   --transition-slow:   350ms ease;
 
   /* Layout */
-  --navbar-height: 64px;
   --sidebar-width: 260px;
-  --max-content:   1200px;
+  --max-content:   100%;
 
   /* Theme-specific Overrides */
-  --bg-blur: rgba(10, 13, 18, 0.92);
-  --border-blur: rgba(255, 255, 255, 0.06);
-  --hover-overlay: rgba(79, 128, 255, 0.12);
-}
-
-:root[data-theme="light"] {
-  --color-950: #ffffff;
-  --color-900: #f8fafc;
-  --color-850: #f1f5f9;
-  --color-800: #e2e8f0;
-  --color-750: #cbd5e1;
-  --color-700: #94a3b8;
-  --color-600: #64748b;
-  --color-500: #475569;
-  --color-400: #334155;
-  --color-300: #1e293b;
-  --color-200: #0f172a;
-  --color-100: #020617;
-  --color-50:  #000000;
-  --color-25:  #000000;
-  --color-0:   #000000;
-
-  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-  --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-  
   --bg-blur: rgba(255, 255, 255, 0.92);
   --border-blur: rgba(0, 0, 0, 0.06);
-  --hover-overlay: rgba(79, 128, 255, 0.1);
+  --hover-overlay: rgba(139, 92, 246, 0.08);
+}
+
+:root[data-theme="dark"] {
+  --color-950: #0a0d12;
+  --color-900: #0f1117;
+  --color-850: #141720;
+  --color-800: #1a1e2e;
+  --color-750: #1f2438;
+  --color-700: #252a42;
+  --color-600: #343b58;
+  --color-500: #4a5278;
+  --color-400: #6b7399;
+  --color-300: #8d96b8;
+  --color-200: #b4bad3;
+  --color-100: #d8dbea;
+  --color-50:  #eef0f7;
+  --color-25:  #f7f8fb;
+  --color-0:   #ffffff;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+  --shadow-lg:  0 10px 30px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-xl:  0 20px 50px rgba(0,0,0,0.6);
+  
+  --bg-blur: rgba(10, 13, 18, 0.92);
+  --border-blur: rgba(255, 255, 255, 0.06);
+  --hover-overlay: rgba(139, 92, 246, 0.15);
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
@@ -180,18 +179,18 @@ a:hover { color: var(--color-0); }
 .container {
   width: 100%;
   max-width: var(--max-content);
-  margin: 0 auto;
+  margin: 0;
   padding: 0 var(--space-8);
 }
 
 .page-wrapper {
-  padding-top: var(--navbar-height);
   flex: 1;
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
 }
 
 .page-content {
-  padding: var(--space-8) 0;
+  padding: var(--space-8);
 }
 
 /* ─── Navbar ─────────────────────────────────────────────────── */
