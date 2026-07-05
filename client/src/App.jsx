@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard';
 import NewBooking from './pages/NewBooking';
 import BookingDetail from './pages/BookingDetail';
 import EditBooking from './pages/EditBooking';
+import ErrorBoundary from './components/ErrorBoundary';
+
 
 function NotFound() {
   return (
@@ -20,7 +22,9 @@ function NotFound() {
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <BrowserRouter>
+
       <a
         href="#main-content"
         className="btn btn-primary"
@@ -51,5 +55,6 @@ export default function App() {
         <Route path="*"                      element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </ErrorBoundary>
   );
 }
