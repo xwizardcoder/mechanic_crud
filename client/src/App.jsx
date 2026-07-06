@@ -1,10 +1,13 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Dashboard from './pages/Dashboard';
-import NewBooking from './pages/NewBooking';
-import BookingDetail from './pages/BookingDetail';
-import EditBooking from './pages/EditBooking';
+import LoadingSpinner from './components/LoadingSpinner';
 import ErrorBoundary from './components/ErrorBoundary';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const NewBooking = lazy(() => import('./pages/NewBooking'));
+const BookingDetail = lazy(() => import('./pages/BookingDetail'));
+const EditBooking = lazy(() => import('./pages/EditBooking'));
 
 
 function NotFound() {
@@ -45,14 +48,16 @@ export default function App() {
 
       <Sidebar />
 
-      <Routes>
-        <Route path="/"                      element={<Dashboard />} />
-        <Route path="/bookings"              element={<Navigate to="/" replace />} />
-        <Route path="/bookings/new"          element={<NewBooking />} />
-        <Route path="/bookings/:id"          element={<BookingDetail />} />
-        <Route path="/bookings/:id/edit"     element={<EditBooking />} />
-        <Route path="*"                      element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<LoadingSpinner text="Loading page..." />}>
+        <Routes>
+          <Route path="/"                      element={<Dashboard />} />
+          <Route path="/bookings"              element={<Navigate to="/" replace />} />
+          <Route path="/bookings/new"          element={<NewBooking />} />
+          <Route path="/bookings/:id"          element={<BookingDetail />} />
+          <Route path="/bookings/:id/edit"     element={<EditBooking />} />
+          <Route path="*"                      element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
     </ErrorBoundary>
   );
