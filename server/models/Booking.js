@@ -1,8 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const FILE_DIR = path.join(__dirname, '../data');
-const FILE_PATH = path.join(FILE_DIR, 'bookings.json');
+const isVercel = process.env.VERCEL === '1';
+const FILE_PATH = isVercel
+  ? '/tmp/bookings.json'
+  : path.join(__dirname, '../data/bookings.json');
+const FILE_DIR = path.dirname(FILE_PATH);
 
 // Ensure data folder and file exists
 const initDB = () => {
