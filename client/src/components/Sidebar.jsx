@@ -83,7 +83,11 @@ export default function Sidebar() {
             <a href="#support" className="sidebar-link">Support</a>
           </li>
           <li>
-            <button onClick={toggleTheme} className="sidebar-link w-full text-left">
+            <button
+              onClick={toggleTheme}
+              className="sidebar-link w-full text-left"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            >
               Theme: {theme === 'dark' ? 'Dark' : 'Light'}
             </button>
           </li>

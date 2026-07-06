@@ -119,7 +119,7 @@ export default function Dashboard() {
             <div>
               <strong>Error:</strong> {error}
               <br />
-              <button className="btn btn-ghost btn-sm" style={{ marginTop: 8 }} onClick={fetchBookings}>
+              <button className="btn btn-ghost btn-sm" style={{ marginTop: 8 }} onClick={fetchBookings} aria-label="Retry loading bookings">
                 Retry
               </button>
             </div>

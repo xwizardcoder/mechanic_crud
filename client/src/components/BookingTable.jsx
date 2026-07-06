@@ -15,7 +15,7 @@ export default function BookingTable({ bookings, onDelete }) {
             <th>Date</th>
             <th>Job title</th>
             <th>Employment Type</th>
-            <th></th>
+            <th aria-label="Actions"></th>
           </tr>
         </thead>
         <tbody>
@@ -44,7 +44,7 @@ export default function BookingTable({ bookings, onDelete }) {
                 </td>
                 <td className="actions-cell">
                   <div className="dropdown">
-                    <button className="btn btn-ghost btn-icon" aria-label="More options">
+                    <button className="btn btn-ghost btn-icon" aria-label="More options" aria-haspopup="true">
                       ⋮
                     </button>
                     <div className="dropdown-content">
