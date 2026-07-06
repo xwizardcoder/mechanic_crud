@@ -31,12 +31,3 @@ export function PriorityBadge({ priority }) {
   );
 }
 
-export const STATUS_OPTIONS = Object.entries(STATUS_CONFIG).map(([value, cfg]) => ({
-  value,
-  label: cfg.label,
-}));
-
-export const PRIORITY_OPTIONS = Object.entries(PRIORITY_CONFIG).map(([value, cfg]) => ({
-  value,
-  label: cfg.label,
-}));
