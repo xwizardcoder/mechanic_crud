@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const Booking = require('../models/Booking');
 const { validateBooking } = require('../middleware/validate');
 const { sanitizeMiddleware } = require('../middleware/sanitize');
+const { authorize } = require('../middleware/authorize');
 
 // GET /api/bookings/stats — Dashboard statistics
-router.get('/stats', async (req, res) => {
+router.get('/stats', authorize('stats'), async (req, res) => {
   try {
     const [total, pending, in_progress, completed, cancelled, highPriority] = await Promise.all([
       Booking.countDocuments(),
@@ -28,7 +29,7 @@ router.get('/stats', async (req, res) => {
 });
 
 // GET /api/bookings — List all bookings with search, filter, sort
-router.get('/', async (req, res) => {
+router.get('/', authorize('read'), async (req, res) => {
   try {
     const {
       search = '',
@@ -85,7 +86,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/bookings/:id — Single booking
-router.get('/:id', async (req, res) => {
+router.get('/:id', authorize('read'), async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
@@ -104,7 +105,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST /api/bookings — Create booking
-router.post('/', sanitizeMiddleware, validateBooking, async (req, res) => {
+router.post('/', authorize('create'), sanitizeMiddleware, validateBooking, async (req, res) => {
   try {
     const booking = new Booking(req.body);
     const saved = await booking.save();
@@ -130,7 +131,7 @@ router.post('/', sanitizeMiddleware, validateBooking, async (req, res) => {
 });
 
 // PUT /api/bookings/:id — Update booking
-router.put('/:id', sanitizeMiddleware, validateBooking, async (req, res) => {
+router.put('/:id', authorize('update'), sanitizeMiddleware, validateBooking, async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
@@ -167,7 +168,7 @@ router.put('/:id', sanitizeMiddleware, validateBooking, async (req, res) => {
 });
 
 // DELETE /api/bookings/:id — Delete booking
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authorize('delete'), async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
