@@ -1,67 +1,16 @@
-# Mechanic Booking System — CRUD Application
+# React + Vite
 
-A full-stack **MERN** (MongoDB · Express · React · Node.js) digital management system for mechanic shop floor staff.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Features
-- ✅ Full CRUD: Create, Read, Update, Delete service job bookings
-- ✅ Search & filter by status, service type, priority
-- ✅ Real-time form validation with XSS sanitization
-- ✅ Loading indicators for all async operations
-- ✅ Empty state UI when no records found
-- ✅ Confirm modal before delete
-- ✅ Analytics telemetry simulation
-- ✅ 100% ARIA accessible
+Currently, two official plugins are available:
 
-## Tech Stack
-- **Frontend**: React 18 + Vite + React Router DOM
-- **Backend**: Node.js + Express 4
-- **Database**: MongoDB Atlas + Mongoose
-- **Deploy**: Vercel
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Local Setup
+## React Compiler
 
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account (or local MongoDB)
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/xwizardcoder/mechanic_crud.git
-cd mechanic_crud
-```
+## Expanding the Oxlint configuration
 
-### 2. Server setup
-```bash
-cd server
-npm install
-cp ../.env.example .env
-# Edit .env and add your MONGODB_URI
-npm run dev
-```
-
-### 3. Client setup
-```bash
-cd client
-npm install
-npm run dev
-```
-
-Visit `http://localhost:5173`
-
-## Vercel Deployment
-
-1. Push to GitHub
-2. Import repo in Vercel dashboard
-3. Add environment variable: `MONGODB_URI` = your MongoDB Atlas connection string
-4. Deploy ✅
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/bookings` | List all bookings |
-| POST | `/api/bookings` | Create booking |
-| GET | `/api/bookings/:id` | Get single booking |
-| PUT | `/api/bookings/:id` | Update booking |
-| DELETE | `/api/bookings/:id` | Delete booking |
-| GET | `/api/bookings/stats` | Get dashboard stats |
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
