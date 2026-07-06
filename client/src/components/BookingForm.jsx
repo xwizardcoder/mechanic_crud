@@ -1,5 +1,5 @@
 import { useState, useId } from 'react';
-import { sanitizeObject } from '../utils/sanitize';
+import { sanitizeObject, sanitizeString } from '../utils/sanitize';
 
 const MECHANICS = [
   'Rajesh Kumar', 'Priya Sharma', 'Mohammed Ali', 'Sunita Patel',
@@ -115,9 +115,13 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
     if (errors[field]) setClientErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleBlur = (field) => () => {
+  const handleBlur = (field) => (e) => {
+    const value = e.target.value;
+    const sanitizedValue = typeof value === 'string' ? sanitizeString(value) : value;
+    const updatedData = { ...data, [field]: sanitizedValue };
+    setData(updatedData);
     setTouched((prev) => ({ ...prev, [field]: true }));
-    const fieldErrors = validate({ ...data });
+    const fieldErrors = validate(updatedData);
     setClientErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
   };
 
