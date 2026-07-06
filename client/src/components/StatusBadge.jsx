@@ -13,13 +13,9 @@ const PRIORITY_CONFIG = {
 };
 
 export function StatusBadge({ status }) {
-  const config = STATUS_CONFIG[status] || { label: status, icon: '?' };
+  const config = STATUS_CONFIG[status] || { label: status };
   return (
-    <span
-      className={`badge badge-${status}`}
-      aria-label={`Status: ${config.label}`}
-      role="status"
-    >
+    <span className={`badge badge-${status}`}>
       <span className="badge-dot" aria-hidden="true" />
       {config.label}
     </span>
@@ -27,12 +23,9 @@ export function StatusBadge({ status }) {
 }
 
 export function PriorityBadge({ priority }) {
-  const config = PRIORITY_CONFIG[priority] || { label: priority, icon: '' };
+  const config = PRIORITY_CONFIG[priority] || { label: priority };
   return (
-    <span
-      className={`badge badge-${priority}`}
-      aria-label={`Priority: ${config.label}`}
-    >
+    <span className={`badge badge-${priority}`}>
       {config.label}
     </span>
   );

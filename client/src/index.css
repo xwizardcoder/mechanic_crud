@@ -36,16 +36,16 @@
   --info:     #06b6d4;
 
   /* Status Colours */
-  --status-pending:     #f59e0b;
-  --status-in_progress: #8b5cf6;
-  --status-completed:   #10b981;
-  --status-cancelled:   #64748b;
+  --status-pending:     #b45309;
+  --status-in_progress: #7c3aed;
+  --status-completed:   #047857;
+  --status-cancelled:   #475569;
 
   /* Priority Colours */
-  --priority-low:    #94a3b8;
-  --priority-normal: #8b5cf6;
-  --priority-high:   #f59e0b;
-  --priority-urgent: #ef4444;
+  --priority-low:    #475569;
+  --priority-normal: #7c3aed;
+  --priority-high:   #b45309;
+  --priority-urgent: #b91c1c;
 
   /* Spacing (16px base, 8px steps) */
   --space-1:  4px;
@@ -124,6 +124,18 @@
   --bg-blur: rgba(10, 13, 18, 0.92);
   --border-blur: rgba(255, 255, 255, 0.06);
   --hover-overlay: rgba(139, 92, 246, 0.15);
+
+  /* Status Colours for Dark Mode (Vibrant) */
+  --status-pending:     #f59e0b;
+  --status-in_progress: #a78bfa;
+  --status-completed:   #10b981;
+  --status-cancelled:   #8d96b8;
+
+  /* Priority Colours for Dark Mode (Vibrant) */
+  --priority-low:    #8d96b8;
+  --priority-normal: #a78bfa;
+  --priority-high:   #f59e0b;
+  --priority-urgent: #ef4444;
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
@@ -332,15 +344,16 @@ a:hover { color: var(--color-0); }
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--color-0);
+  background: var(--accent-dark);
+  color: #ffffff;
   border-color: var(--accent-dark);
   box-shadow: var(--shadow-accent);
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent-dark);
+  background: #6d28d9;
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(79,128,255,0.45);
+  box-shadow: 0 6px 24px rgba(109, 40, 217, 0.45);
 }
 
 .btn-secondary {
@@ -1112,6 +1125,7 @@ a:hover { color: var(--color-0); }
 
 /* ─── Utilities ──────────────────────────────────────────────── */
 .text-muted  { color: var(--color-500); }
+:root[data-theme="dark"] .text-muted { color: var(--color-300); }
 .text-sm     { font-size: var(--font-size-sm); }
 .text-xs     { font-size: var(--font-size-xs); }
 .text-accent { color: var(--accent-light); }
