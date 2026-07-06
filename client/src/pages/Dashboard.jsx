@@ -94,24 +94,27 @@ export default function Dashboard() {
         </div>
 
         {/* Stats */}
-        {!statsLoading && stats && (
-          <section aria-label="Booking statistics">
-            <div className="stats-grid">
-              <StatsCard value={stats.total}       label="Total Bookings"   color="var(--accent)" />
-              <StatsCard value={stats.pending}     label="Pending"          color="var(--status-pending)" />
-              <StatsCard value={stats.in_progress} label="In Progress"      color="var(--status-in_progress)" />
-              <StatsCard value={stats.completed}   label="Completed"        color="var(--status-completed)" />
-              <StatsCard value={stats.cancelled}   label="Cancelled"        color="var(--color-400)" />
-              <StatsCard value={stats.highPriority}label="High Priority"    color="var(--priority-urgent)" />
-            </div>
-          </section>
-        )}
-        {statsLoading && (
-          <div style={{ height: 100, display: 'flex', alignItems: 'center' }} aria-label="Loading statistics">
-            <span className="spinner spinner-sm" aria-hidden="true" />
-            <span className="text-muted" style={{ marginLeft: 12 }}>Loading stats…</span>
+        <section aria-label="Booking statistics">
+          <div className="stats-grid">
+            {statsLoading || !stats ? (
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="stat-card" style={{ display: 'flex', flexDirection: 'column', gap: 10 }} aria-hidden="true">
+                  <div className="skeleton-shimmer" style={{ height: 36, width: 60, borderRadius: 6 }} />
+                  <div className="skeleton-shimmer" style={{ height: 16, width: 100, borderRadius: 4 }} />
+                </div>
+              ))
+            ) : (
+              <>
+                <StatsCard value={stats.total}       label="Total Bookings"   color="var(--accent)" />
+                <StatsCard value={stats.pending}     label="Pending"          color="var(--status-pending)" />
+                <StatsCard value={stats.in_progress} label="In Progress"      color="var(--status-in_progress)" />
+                <StatsCard value={stats.completed}   label="Completed"        color="var(--status-completed)" />
+                <StatsCard value={stats.cancelled}   label="Cancelled"        color="var(--color-400)" />
+                <StatsCard value={stats.highPriority}label="High Priority"    color="var(--priority-urgent)" />
+              </>
+            )}
           </div>
-        )}
+        </section>
 
         {/* Error */}
         {error && (
