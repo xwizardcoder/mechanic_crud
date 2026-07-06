@@ -11,7 +11,6 @@ function NotFound() {
   return (
     <main className="page-wrapper" id="main-content">
       <div className="container page-content flex-center" style={{ flexDirection: 'column', gap: 16, paddingTop: 80 }}>
-        <span style={{ fontSize: 64 }} aria-hidden="true">🔩</span>
         <h1 style={{ fontSize: 48, letterSpacing: '-0.04em' }}>404</h1>
         <p className="text-muted">This page doesn't exist. Looks like a loose bolt!</p>
         <a href="/" className="btn btn-primary">← Back to Dashboard</a>

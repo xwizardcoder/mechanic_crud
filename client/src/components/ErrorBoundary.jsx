@@ -25,7 +25,6 @@ export default class ErrorBoundary extends Component {
             role="alert"
             aria-live="assertive"
           >
-            <span style={{ fontSize: 56 }} aria-hidden="true">⚙️</span>
             <h1>Something went wrong</h1>
             <p className="text-muted">
               An unexpected error occurred. Please refresh the page or go back to the dashboard.
@@ -53,7 +52,7 @@ export default class ErrorBoundary extends Component {
                 onClick={() => this.setState({ hasError: false, error: null })}
                 aria-label="Try again"
               >
-                🔄 Try Again
+                Try Again
               </button>
               <Link to="/" className="btn btn-primary" aria-label="Go back to dashboard">
                 ← Dashboard

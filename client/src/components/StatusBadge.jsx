@@ -1,15 +1,15 @@
 const STATUS_CONFIG = {
-  pending:     { label: 'Pending',     icon: '⏳' },
-  in_progress: { label: 'In Progress', icon: '🔧' },
-  completed:   { label: 'Completed',   icon: '✅' },
-  cancelled:   { label: 'Cancelled',   icon: '✗' },
+  pending: { label: 'Pending' },
+  in_progress: { label: 'In Progress' },
+  completed: { label: 'Completed' },
+  cancelled: { label: 'Cancelled' },
 };
 
 const PRIORITY_CONFIG = {
-  low:    { label: 'Low',    icon: '↓' },
-  normal: { label: 'Normal', icon: '→' },
-  high:   { label: 'High',   icon: '↑' },
-  urgent: { label: 'Urgent', icon: '‼' },
+  low: { label: 'Low' },
+  normal: { label: 'Normal' },
+  high: { label: 'High' },
+  urgent: { label: 'Urgent' },
 };
 
 export function StatusBadge({ status }) {

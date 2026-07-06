@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-inner">
         <Link to="/" className="navbar-brand" aria-label="Mechanic Booking System home">
-          <div className="navbar-logo" aria-hidden="true">🔧</div>
+          <div className="navbar-logo" aria-hidden="true">M</div>
           <div>
             <div className="navbar-title">MechPro</div>
             <div className="navbar-subtitle">Booking System</div>
@@ -32,7 +32,7 @@ export default function Navbar() {
               className={({ isActive }) => `navbar-link${isActive ? ' active' : ''}`}
               aria-label="Dashboard"
             >
-              📊 Dashboard
+              Dashboard
             </NavLink>
           </li>
           <li>
@@ -41,26 +41,26 @@ export default function Navbar() {
               className={({ isActive }) => `navbar-link${isActive ? ' active' : ''}`}
               aria-label="All bookings"
             >
-              📋 All Bookings
+              All Bookings
             </NavLink>
           </li>
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button 
-            onClick={toggleTheme} 
-            className="btn btn-ghost btn-icon" 
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            style={{ fontSize: 20 }}
+            style={{ fontSize: 14 }}
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? 'Light' : 'Dark'}
           </button>
           <Link
             to="/bookings/new"
             className="navbar-cta"
             aria-label="Create new booking"
           >
-            ＋ New Booking
+            + New Booking
           </Link>
         </div>
       </div>

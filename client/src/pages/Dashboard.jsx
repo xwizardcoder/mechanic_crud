@@ -89,7 +89,7 @@ export default function Dashboard() {
             <p className="page-subtitle" style={{ color: 'var(--color-400)', marginTop: 4 }}>Manage and collaborate on all service bookings</p>
           </div>
           <Link to="/bookings/new" className="btn btn-primary" style={{ backgroundColor: 'var(--accent-dark)', borderRadius: 'var(--radius-sm)' }} aria-label="Add new booking">
-            ＋ Add booking
+            Add booking
           </Link>
         </div>
 
@@ -97,12 +97,12 @@ export default function Dashboard() {
         {!statsLoading && stats && (
           <section aria-label="Booking statistics">
             <div className="stats-grid">
-              <StatsCard icon="📋" value={stats.total}       label="Total Bookings"   color="var(--accent)" />
-              <StatsCard icon="⏳" value={stats.pending}     label="Pending"          color="var(--status-pending)" />
-              <StatsCard icon="🔧" value={stats.in_progress} label="In Progress"      color="var(--status-in_progress)" />
-              <StatsCard icon="✅" value={stats.completed}   label="Completed"        color="var(--status-completed)" />
-              <StatsCard icon="✗"  value={stats.cancelled}   label="Cancelled"        color="var(--color-400)" />
-              <StatsCard icon="⚡" value={stats.highPriority}label="High Priority"    color="var(--priority-urgent)" />
+              <StatsCard value={stats.total}       label="Total Bookings"   color="var(--accent)" />
+              <StatsCard value={stats.pending}     label="Pending"          color="var(--status-pending)" />
+              <StatsCard value={stats.in_progress} label="In Progress"      color="var(--status-in_progress)" />
+              <StatsCard value={stats.completed}   label="Completed"        color="var(--status-completed)" />
+              <StatsCard value={stats.cancelled}   label="Cancelled"        color="var(--color-400)" />
+              <StatsCard value={stats.highPriority}label="High Priority"    color="var(--priority-urgent)" />
             </div>
           </section>
         )}
@@ -116,12 +116,11 @@ export default function Dashboard() {
         {/* Error */}
         {error && (
           <div className="alert alert-error" role="alert">
-            <span className="alert-icon">⚠️</span>
             <div>
               <strong>Error:</strong> {error}
               <br />
               <button className="btn btn-ghost btn-sm" style={{ marginTop: 8 }} onClick={fetchBookings}>
-                🔄 Retry
+                Retry
               </button>
             </div>
           </div>
@@ -163,7 +162,7 @@ export default function Dashboard() {
                 onClick={() => { setSearch(''); setFilters(DEFAULT_FILTERS); }}
                 aria-label="Clear all filters"
               >
-                ✕ Clear
+                Clear
               </button>
             )}
           </div>
@@ -183,14 +182,13 @@ export default function Dashboard() {
           <LoadingSpinner text="Loading bookings…" />
         ) : bookings.length === 0 ? (
           <EmptyState
-            icon="🔧"
             title="No bookings found"
             text={
               search || Object.values(filters).some((v) => v !== 'all')
                 ? "Try adjusting your search or filters to find what you're looking for."
                 : 'Get started by creating your first service booking.'
             }
-            actionLabel={!search ? '+ Create First Booking' : undefined}
+            actionLabel={!search ? 'Create First Booking' : undefined}
             actionTo="/bookings/new"
           />
         ) : (

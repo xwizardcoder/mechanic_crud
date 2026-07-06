@@ -88,7 +88,7 @@ function Field({ name, label, required, formId, errors, touched, children }) {
       {children}
       {hasError && (
         <span className="form-error" role="alert" id={`${formId}-${name}-error`}>
-          ⚠ {errors[name]}
+          {errors[name]}
         </span>
       )}
     </div>
@@ -365,7 +365,7 @@ export default function BookingForm({ initialData = {}, onSubmit, isLoading = fa
                 Saving…
               </>
             ) : (
-              <>💾 {submitLabel}</>
+              <>{submitLabel}</>
             )}
           </button>
         </div>

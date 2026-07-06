@@ -69,7 +69,6 @@ export default function BookingDetail() {
       <main className="page-wrapper" id="main-content">
         <div className="container page-content">
           <div className="alert alert-error" role="alert">
-            <span className="alert-icon">⚠️</span>
             <div>
               <strong>Error:</strong> {error}
               <br />
@@ -95,7 +94,6 @@ export default function BookingDetail() {
 
         {justCreated && (
           <div className="alert alert-success" role="status" aria-live="polite">
-            <span className="alert-icon">✅</span>
             <span>Booking created successfully!</span>
           </div>
         )}
@@ -115,14 +113,14 @@ export default function BookingDetail() {
           </div>
           <div style={{ display: 'flex', gap: 12 }}>
             <Link to={`/bookings/${id}/edit`} className="btn btn-secondary" aria-label="Edit this booking">
-              ✏️ Edit
+              Edit
             </Link>
             <button
               className="btn btn-danger"
               onClick={() => setShowDelete(true)}
               aria-label="Delete this booking"
             >
-              🗑 Delete
+              Delete
             </button>
           </div>
         </div>

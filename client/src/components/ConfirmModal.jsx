@@ -65,9 +65,7 @@ export default function ConfirmModal({
       aria-describedby="modal-desc"
     >
       <div className="modal" ref={modalRef}>
-        <div className="modal-icon" aria-hidden="true">
-          {isDangerous ? '🗑️' : '⚠️'}
-        </div>
+
         <h2 className="modal-title" id="modal-title">{title}</h2>
         <p className="modal-text" id="modal-desc">{message}</p>
         <div className="modal-actions">

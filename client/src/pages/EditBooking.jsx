@@ -56,7 +56,6 @@ export default function EditBooking() {
       <main className="page-wrapper" id="main-content">
         <div className="container page-content">
           <div className="alert alert-error" role="alert">
-            <span className="alert-icon">⚠️</span>
             <div>
               <strong>Error:</strong> {error}
               <br />
@@ -92,7 +91,6 @@ export default function EditBooking() {
 
         {error && (
           <div className="alert alert-error" role="alert">
-            <span className="alert-icon">⚠️</span>
             <span>{error}</span>
           </div>
         )}

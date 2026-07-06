@@ -15,7 +15,7 @@ export function Toast({ message, type = 'success', duration = 4000, onClose }) {
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-  const icons = { success: '✅', error: '⚠️', info: 'ℹ️' };
+
 
   return (
     <div
@@ -35,7 +35,7 @@ export function Toast({ message, type = 'success', duration = 4000, onClose }) {
         pointerEvents: visible ? 'auto' : 'none',
       }}
     >
-      <span className="alert-icon" aria-hidden="true">{icons[type]}</span>
+
       <span style={{ flex: 1 }}>{message}</span>
       <button
         onClick={() => { setVisible(false); setTimeout(onClose, 300); }}

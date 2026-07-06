@@ -6,7 +6,7 @@ export default function StatsCard({ icon, value, label, color = 'var(--accent)' 
       role="region"
       aria-label={`${label}: ${value}`}
     >
-      <span className="stat-icon" aria-hidden="true">{icon}</span>
+      {icon && <span className="stat-icon" aria-hidden="true">{icon}</span>}
       <div className="stat-value" aria-live="polite">{value}</div>
       <div className="stat-label">{label}</div>
     </div>
