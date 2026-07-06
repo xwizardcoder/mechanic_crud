@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Booking = require('../models/Booking');
 const { validateBooking } = require('../middleware/validate');
 const { sanitizeMiddleware } = require('../middleware/sanitize');
@@ -88,7 +87,7 @@ router.get('/', authorize('read'), async (req, res) => {
 // GET /api/bookings/:id — Single booking
 router.get('/:id', authorize('read'), async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
     }
 
@@ -133,7 +132,7 @@ router.post('/', authorize('create'), sanitizeMiddleware, validateBooking, async
 // PUT /api/bookings/:id — Update booking
 router.put('/:id', authorize('update'), sanitizeMiddleware, validateBooking, async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
     }
 
@@ -170,7 +169,7 @@ router.put('/:id', authorize('update'), sanitizeMiddleware, validateBooking, asy
 // DELETE /api/bookings/:id — Delete booking
 router.delete('/:id', authorize('delete'), async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ success: false, message: 'Invalid booking ID' });
     }
 
